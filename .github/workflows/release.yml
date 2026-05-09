@@ -17,10 +17,10 @@ jobs:
             - env:
                 USERNAME: github-actions[bot]
                 EMAIL: 41898282+github0actions[bot]@users.noreply.github.com
-                BUNP_LEVEL: ${{ inputs.bump-level }}
+                BUMP_LEVEL: ${{ inputs.bump-level }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                 git config --global user.name "${USERNAME}"
                 git config --global user.email "${EMAIL}"
-                version="$(.github/scripts/bump.sh "${BUMP_LEVEL}")"
+                version="$(bash .github/scripts/bump.sh "${BUMP_LEVEL}")"
                 gh release create "${version}" --title "${version}" --generate-notes
